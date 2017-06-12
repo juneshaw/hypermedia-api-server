@@ -7,7 +7,7 @@ const url = require('url')
 
 describe("POST /api/login", () => {
 
-  beforeEach(() => db.clear())
+  beforeEach(() => db.init())
 
   it("renders a 200 with the user info if the user has been found", async () => {
     const person = db.people.insert({name: "Demarcus Mayer"})
@@ -26,6 +26,25 @@ describe("POST /api/login", () => {
           href: `http://127.0.0.1:${port}/api/people/${person.id}`
         }
       }
+    })
+  })
+
+  it("renders a 404 if the user was not found", async () => {
+    let response
+    try {
+      response = await chai.request(app)
+        .post('/api/login')
+        .send({ name: 'demarcus mayer' })
+    } catch (e) {
+      response = e.response
+    }
+
+    const port = url.parse(response.request.url).port
+
+    expect(response).to.have.status(404)
+    expect(response).to.be.json
+    expect(response.body).to.deep.eq({
+      error: "Invalid name"
     })
   })
 

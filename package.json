@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "PORT=8181 node ./bin/www"
+    "start": "PORT=8181 node ./bin/www",
+    "test": "NODE_ENV=test mocha --recursive test"
   },
   "dependencies": {
     "body-parser": "~1.15.2",
@@ -11,5 +12,10 @@
     "express": "~4.14.0",
     "morgan": "~1.7.0",
     "serve-favicon": "^2.4.3"
+  },
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.4.2"
   }
 }

@@ -4,14 +4,18 @@ const logger = require('morgan')
 const bodyParser = require('body-parser')
 
 const index = require('./routes/index')
+const login = require('./routes/login')
 
 const app = express()
 
-app.use(logger('dev'))
+if (process.env.NODE_ENV !== 'test') {
+  app.use(logger('dev'))
+}
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.use('/', index)
+app.use('/api', index)
+app.use('/api', login)
 
 app.use(function(req, res, next) {
   const err = new Error('Not Found')

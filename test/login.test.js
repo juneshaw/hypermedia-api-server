@@ -29,7 +29,7 @@ describe("POST /api/login", () => {
     })
   })
 
-  it("renders a 404 if the user was not found", async () => {
+  it("renders a 401 if the user was not found", async () => {
     let response
     try {
       response = await chai.request(app)
@@ -41,7 +41,7 @@ describe("POST /api/login", () => {
 
     const port = url.parse(response.request.url).port
 
-    expect(response).to.have.status(404)
+    expect(response).to.have.status(401)
     expect(response).to.be.json
     expect(response.body).to.deep.eq({
       error: "Invalid name"

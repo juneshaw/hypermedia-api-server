@@ -19,7 +19,7 @@ router.post('/login', (req, res, next) => {
   if (person) {
     res.json(serialize(req, person))
   } else {
-    res.status(404)
+    res.status(401)
     res.json({error: "Invalid name"})
   }
 })

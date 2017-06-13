@@ -3,7 +3,6 @@ const router = express.Router()
 const linker = require('../lib/linker')
 
 router.get('/', (req, res, next) => {
-
   res.json({
     _links: {
       self: {

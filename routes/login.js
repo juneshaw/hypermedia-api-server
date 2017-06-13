@@ -3,6 +3,16 @@ const router = express.Router()
 const db = require('../lib/db')
 const linker = require('../lib/linker')
 
+router.post('/login', (req, res, next) => {
+  const person = db.people.findByName(req.body.name)
+  if (person) {
+    res.json(serialize(req, person))
+  } else {
+    res.status(401)
+    res.json({error: "Invalid name"})
+  }
+})
+
 function serialize(req, person) {
   return {
     name: person.name,
@@ -13,15 +23,5 @@ function serialize(req, person) {
     }
   }
 }
-
-router.post('/login', (req, res, next) => {
-  const person = db.people.findByName(req.body.name)
-  if (person) {
-    res.json(serialize(req, person))
-  } else {
-    res.status(401)
-    res.json({error: "Invalid name"})
-  }
-})
 
 module.exports = router

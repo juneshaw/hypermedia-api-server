@@ -9,12 +9,12 @@ describe("POST /api/login", () => {
 
   beforeEach(() => db.init())
 
-  it("renders a 200 with the user info if the user has been found", async () => {
+  it("renders a 200 with the user info if the user has been found (case insensitive)", async () => {
     const person = db.people.insert({name: "Demarcus Mayer"})
 
     const response = await chai.request(app)
       .post('/api/login')
-      .send({ name: 'demarcus mayer' })
+      .send({ name: 'demarcus mayer  ' })
     const port = url.parse(response.request.url).port
 
     expect(response).to.have.status(200)
@@ -27,6 +27,15 @@ describe("POST /api/login", () => {
         }
       }
     })
+  })
+
+  it("renders a 200 with the user info if the user has been found (exact match)", async () => {
+    const person = db.people.insert({name: "Demarcus Mayer"})
+
+    const response = await chai.request(app)
+      .post('/api/login')
+      .send({ name: 'Demarcus Mayer' })
+    expect(response).to.have.status(200)
   })
 
   it("renders a 401 if the user was not found", async () => {

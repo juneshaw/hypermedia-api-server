@@ -4,7 +4,7 @@ const expect = chai.expect
 const app = require('../app')
 const url = require('url')
 
-describe("GET /", () => {
+describe("GET /api", () => {
 
   it("renders a list of available endpoints", async function() {
     const response = await chai.request(app).get('/api')
@@ -19,6 +19,9 @@ describe("GET /", () => {
         },
         login: {
           href: `http://127.0.0.1:${port}/api/login`
+        },
+        people: {
+          href: `http://127.0.0.1:${port}/api/people`
         },
       }
     })

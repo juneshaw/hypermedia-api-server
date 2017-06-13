@@ -10,7 +10,10 @@ router.get('/', (req, res, next) => {
       },
       login: {
         href: linker(req, '/api/login')
-      }
+      },
+      people: {
+        href: linker(req, '/api/people')
+      },
     }
   })
 })

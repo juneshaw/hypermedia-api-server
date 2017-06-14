@@ -30,7 +30,10 @@ describe("GET /api/people", () => {
             _links: {
               self: {
                 href: `http://127.0.0.1:${port}/api/people/${person1.id}`
-              }
+              },
+              meetings: {
+                href: `http://127.0.0.1:${port}/api/people/${person1.id}/meetings`
+              },
             },
             id: person1.id,
             name: 'Frida Kuvalis',
@@ -39,7 +42,10 @@ describe("GET /api/people", () => {
             _links: {
               self: {
                 href: `http://127.0.0.1:${port}/api/people/${person2.id}`
-              }
+              },
+              meetings: {
+                href: `http://127.0.0.1:${port}/api/people/${person2.id}/meetings`
+              },
             },
             id: person2.id,
             name: 'Demarcus Mayer',
@@ -67,8 +73,11 @@ describe("GET /api/people/:id", () => {
     expect(response.body).to.deep.eq({
       _links: {
         self: {
-          href: `http://127.0.0.1:${port}/api/people/${person1.id}`
-        }
+          href: `http://127.0.0.1:${port}/api/people/${person1.id}`,
+        },
+        meetings: {
+          href: `http://127.0.0.1:${port}/api/people/${person1.id}/meetings`
+        },
       },
       id: person1.id,
       name: 'Frida Kuvalis',

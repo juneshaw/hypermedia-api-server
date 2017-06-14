@@ -31,7 +31,10 @@ function serializePerson(req, person) {
     _links: {
       self: {
         href: linker(req, `/api/people/${person.id}`)
-      }
+      },
+      meetings: {
+        href: linker(req, `/api/people/${person.id}/meetings`)
+      },
     },
     id: person.id,
     name: person.name,

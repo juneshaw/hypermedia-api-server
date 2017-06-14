@@ -4,14 +4,17 @@ const db = require('../lib/db')
 const linker = require('../lib/linker')
 
 router.get('/people/:personId/meetings', (req, res, next) => {
-  const meetings = db.meetings.findAll().filter(withParticipant(req.params.personId))
+  const meetings = db.meetings
+    .findAll()
+    .filter(withParticipant(req.params.personId))
+
   res.json(serializeMeetings(req, meetings))
 })
 
 function withParticipant(personId) {
   personId = parseInt(personId, 10)
   return function(meeting) {
-    return meeting.person1_id == personId || meeting.person2_id == personId
+    return meeting.person1_id === personId || meeting.person2_id === personId
   }
 }
 

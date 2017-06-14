@@ -7,6 +7,7 @@ const cors = require('cors')
 const index = require('./routes/index')
 const login = require('./routes/login')
 const people = require('./routes/people')
+const meetings = require('./routes/meetings')
 
 const app = express()
 
@@ -20,6 +21,7 @@ app.use(cors())
 app.use('/api', index)
 app.use('/api', login)
 app.use('/api', people)
+app.use('/api', meetings)
 
 app.use(function(req, res, next) {
   const err = new Error('Not Found')
@@ -29,6 +31,10 @@ app.use(function(req, res, next) {
 
 app.use(function(err, req, res, next) {
   const error = req.app.get('env') === 'development' ? err : {}
+
+  if (process.env.NODE_ENV === 'test') {
+    console.log(err)
+  }
 
   res.status(err.status || 500)
   res.json(err)

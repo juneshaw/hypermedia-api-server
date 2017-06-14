@@ -8,6 +8,11 @@ router.get('/people', (req, res, next) => {
   res.json(serializePeople(req, people))
 })
 
+router.get('/people/:id', (req, res, next) => {
+  const person = db.people.find(req.params.id)
+  res.json(serializePerson(req, person))
+})
+
 function serializePeople(req, people) {
   return {
     _links: {

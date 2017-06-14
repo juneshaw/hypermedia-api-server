@@ -11,6 +11,16 @@ router.get('/people/:personId/meetings', (req, res, next) => {
   res.json(serializeMeetings(req, meetings))
 })
 
+router.post('/people/:personId/meetings', (req, res, next) => {
+  const meeting = db.meetings.insert({
+    person1_id: parseInt(req.params.personId, 10),
+    person2_id: req.body.otherPersonId,
+    comment: req.body.comment,
+  })
+
+  res.json(serializeMeeting(req, meeting))
+})
+
 function withParticipant(personId) {
   personId = parseInt(personId, 10)
   return function(meeting) {

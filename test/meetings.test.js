@@ -64,3 +64,38 @@ describe("GET /api/people/:id/meetings", () => {
   })
 
 })
+
+describe("POST /api/people/:id/meetings", () => {
+
+  beforeEach(() => db.init())
+
+  it("creates and returns the meeting", async () => {
+    const frida = db.people.insert({name: "Frida Kuvalis"})
+    const demarcus = db.people.insert({name: "Demarcus Mayer"})
+
+    const response = await chai.request(app)
+      .post(`/api/people/${frida.id}/meetings`)
+      .send({
+        otherPersonId: demarcus.id,
+        comment: "Some comment"
+      })
+    const port = url.parse(response.request.url).port
+
+    expect(response).to.have.status(200)
+    expect(response).to.be.json
+    expect(response.body).to.deep.eq({
+      _links: {
+        self: {
+          href: `http://127.0.0.1:${port}/api/people/${frida.id}/meetings/1`
+        }
+      },
+      people: [
+        { ref: `http://127.0.0.1:${port}/api/people/${frida.id}`, id: frida.id },
+        { ref: `http://127.0.0.1:${port}/api/people/${demarcus.id}`, id: demarcus.id },
+      ],
+      id: 1,
+      comment: "Some comment",
+    })
+  })
+
+})

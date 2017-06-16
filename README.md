@@ -189,6 +189,55 @@ Response:
 }
 ```
 
+### `PATCH /api/messages`
+
+The request body can be any of these:
+
+```json
+{
+  "messageIds": [ 1, 3 ],
+  "command": "star",
+  "star": false
+}
+```
+
+`star` can be true or false.
+
+```json
+{
+  "messageIds": [ 1, 3 ],
+  "command": "read",
+  "read": true
+}
+```
+
+`read` can be true or false.
+
+```json
+{
+  "messageIds": [ 1, 3 ],
+  "command": "delete"
+}
+```
+
+```json
+{
+  "messageIds": [ 1, 3 ],
+  "command": "addLabel",
+  "label": "dev"
+}
+```
+
+```json
+{
+  "messageIds": [ 1, 3 ],
+  "command": "removeLabel",
+  "label": "dev"
+}
+```
+
+Response: An HTTP 200 Response
+
 ### People
 
 ### `GET /api/people`

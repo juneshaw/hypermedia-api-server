@@ -18,3 +18,17 @@ yarn start
 ```
 
 Then you can see the API running on http://localhost:8181
+
+## API Endpoints
+
+### Messages
+
+`GET /api/messages`
+
+`GET /api/messages/:id`
+
+### People
+
+`GET /api/people`
+
+`GET /api/people/:id`

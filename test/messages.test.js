@@ -15,14 +15,14 @@ describe("/api/messages", () => {
       const demarcus = db.people.insert({name: "Demarcus Mayer"})
       const message1 = db.messages.insert({
         sender_id: frida.id,
-        subject: 'Hi', body: 'Hello there',
+        subject: 'Hi',
         starred: true,
         read: true,
         labels: ['dev', 'personal'],
       })
       const message2 = db.messages.insert({
         sender_id: demarcus.id,
-        subject: 'Hi again', body: 'Second time',
+        subject: 'Hi again',
         starred: false,
         read: false,
         labels: [],
@@ -112,7 +112,7 @@ describe("/api/messages", () => {
       const demarcus = db.people.insert({name: "Demarcus Mayer"})
       const message = db.messages.insert({
         sender_id: frida.id,
-        subject: 'Hi', body: 'Hello there',
+        subject: 'Hi',
         content: 'Hello there',
         starred: true,
         read: true,
@@ -137,6 +137,46 @@ describe("/api/messages", () => {
         labels: ['dev', 'personal'],
         content: 'Hello there',
         sender: {
+          id: frida.id, ref: `http://127.0.0.1:${port}/api/people/${frida.id}`
+        },
+      })
+    })
+
+  })
+
+  describe("POST /api/messages", () => {
+
+    beforeEach(() => db.init())
+
+    it("creates a message with a null sender", async () => {
+      const frida = db.people.insert({name: "Frida Kuvalis"})
+
+      const response = await chai.request(app)
+        .post(`/api/messages`)
+        .send({
+          recipient_id: frida.id,
+          subject: 'I created this',
+          content: 'And it is sent',
+        })
+      const port = url.parse(response.request.url).port
+
+      const message = db.messages.findAll()[0]
+
+      expect(response).to.have.status(200)
+      expect(response).to.be.json
+      expect(response.body).to.deep.eq({
+        _links: {
+          self: {
+            href: `http://127.0.0.1:${port}/api/messages/${message.id}`
+          },
+        },
+        id: message.id,
+        subject: 'I created this',
+        starred: false,
+        read: false,
+        labels: [],
+        content: 'And it is sent',
+        recipient: {
           id: frida.id, ref: `http://127.0.0.1:${port}/api/people/${frida.id}`
         },
       })

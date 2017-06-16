@@ -33,9 +33,16 @@ function serializeMessage(req, message, complete = false) {
     starred: message.starred,
     read: message.read,
     labels: message.labels || [],
-    sender: {
+  }
+  if (message.sender_id) {
+    response.sender = {
       id: message.sender_id, ref: linker(req, `/api/people/${message.sender_id}`)
-    },
+    }
+  }
+  if (message.recipient_id) {
+    response.recipient = {
+      id: message.recipient_id, ref: linker(req, `/api/people/${message.recipient_id}`)
+    }
   }
   if (complete) {
     response.content = message.content

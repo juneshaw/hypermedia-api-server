@@ -13,4 +13,16 @@ router.get('/messages/:id', (req, res, next) => {
   res.json(serializeMessage(req, message, true))
 })
 
+router.post('/messages', (req, res, next) => {
+  const message = db.messages.insert({
+    recipient_id: req.body.recipient_id,
+    subject: req.body.subject,
+    content: req.body.content,
+    read: false,
+    starred: false,
+    labels: [],
+  })
+  res.json(serializeMessage(req, message, true))
+})
+
 module.exports = router

@@ -109,6 +109,50 @@ describe("/api/messages", () => {
         }
       })
     })
+  })
+
+  describe("GET /api/messages/:id", () => {
+
+    beforeEach(() => db.init())
+
+    it("renders a 200 with the a list of messages", async () => {
+      const frida = db.people.insert({name: "Frida Kuvalis"})
+      const demarcus = db.people.insert({name: "Demarcus Mayer"})
+      const message = db.messages.insert({
+        sender_id: frida.id,
+        recipient_id: demarcus.id,
+        subject: 'Hi', body: 'Hello there',
+        content: 'Hello there',
+        starred: true,
+        read: true,
+        labels: ['dev', 'personal'],
+      })
+
+      const response = await chai.request(app).get(`/api/messages/${message.id}`)
+      const port = url.parse(response.request.url).port
+
+      expect(response).to.have.status(200)
+      expect(response).to.be.json
+      expect(response.body).to.deep.eq({
+        _links: {
+          self: {
+            href: `http://127.0.0.1:${port}/api/messages/${message.id}`
+          },
+        },
+        id: message.id,
+        subject: 'Hi',
+        starred: true,
+        read: true,
+        labels: ['dev', 'personal'],
+        content: 'Hello there',
+        sender: {
+          id: frida.id, ref: `http://127.0.0.1:${port}/api/people/${frida.id}`
+        },
+        recipient: {
+          id: demarcus.id, ref: `http://127.0.0.1:${port}/api/people/${demarcus.id}`
+        },
+      })
+    })
 
   })
 })

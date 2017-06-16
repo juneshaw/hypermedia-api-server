@@ -21,8 +21,8 @@ function serializeMessages(req, messages) {
   }
 }
 
-function serializeMessage(req, message) {
-  return {
+function serializeMessage(req, message, complete = false) {
+  const response = {
     _links: {
       self: {
         href: linker(req, `/api/messages/${message.id}`)
@@ -40,6 +40,10 @@ function serializeMessage(req, message) {
       id: message.recipient_id, ref: linker(req, `/api/people/${message.recipient_id}`)
     },
   }
+  if (complete) {
+    response.content = message.content
+  }
+  return response
 }
 
 function getPeople(messages) {

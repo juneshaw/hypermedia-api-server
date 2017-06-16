@@ -15,7 +15,6 @@ describe("/api/messages", () => {
       const demarcus = db.people.insert({name: "Demarcus Mayer"})
       const message1 = db.messages.insert({
         sender_id: frida.id,
-        recipient_id: demarcus.id,
         subject: 'Hi', body: 'Hello there',
         starred: true,
         read: true,
@@ -23,7 +22,6 @@ describe("/api/messages", () => {
       })
       const message2 = db.messages.insert({
         sender_id: demarcus.id,
-        recipient_id: frida.id,
         subject: 'Hi again', body: 'Second time',
         starred: false,
         read: false,
@@ -57,9 +55,6 @@ describe("/api/messages", () => {
               sender: {
                 id: frida.id, ref: `http://127.0.0.1:${port}/api/people/${frida.id}`
               },
-              recipient: {
-                id: demarcus.id, ref: `http://127.0.0.1:${port}/api/people/${demarcus.id}`
-              },
             },
             {
               _links: {
@@ -74,9 +69,6 @@ describe("/api/messages", () => {
               labels: [],
               sender: {
                 id: demarcus.id, ref: `http://127.0.0.1:${port}/api/people/${demarcus.id}`
-              },
-              recipient: {
-                id: frida.id, ref: `http://127.0.0.1:${port}/api/people/${frida.id}`
               },
             },
           ],
@@ -120,7 +112,6 @@ describe("/api/messages", () => {
       const demarcus = db.people.insert({name: "Demarcus Mayer"})
       const message = db.messages.insert({
         sender_id: frida.id,
-        recipient_id: demarcus.id,
         subject: 'Hi', body: 'Hello there',
         content: 'Hello there',
         starred: true,
@@ -147,9 +138,6 @@ describe("/api/messages", () => {
         content: 'Hello there',
         sender: {
           id: frida.id, ref: `http://127.0.0.1:${port}/api/people/${frida.id}`
-        },
-        recipient: {
-          id: demarcus.id, ref: `http://127.0.0.1:${port}/api/people/${demarcus.id}`
         },
       })
     })

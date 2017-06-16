@@ -36,9 +36,6 @@ function serializeMessage(req, message, complete = false) {
     sender: {
       id: message.sender_id, ref: linker(req, `/api/people/${message.sender_id}`)
     },
-    recipient: {
-      id: message.recipient_id, ref: linker(req, `/api/people/${message.recipient_id}`)
-    },
   }
   if (complete) {
     response.content = message.content
@@ -51,7 +48,6 @@ function getPeople(messages) {
     messages
       .reduce((set, message) => {
         set.add(db.people.find(message.sender_id))
-        set.add(db.people.find(message.recipient_id))
         return set
       }, new Set())
       .values()

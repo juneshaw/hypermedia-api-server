@@ -1,17 +1,9 @@
-const express = require('express')
-const router = express.Router()
-const db = require('../lib/db')
-const linker = require('../lib/linker')
+const linker = require('../../lib/linker')
 
-router.get('/people', (req, res, next) => {
-  const people = db.people.findAll()
-  res.json(serializePeople(req, people))
-})
-
-router.get('/people/:id', (req, res, next) => {
-  const person = db.people.find(req.params.id)
-  res.json(serializePerson(req, person))
-})
+module.exports = {
+  serializePeople,
+  serializePerson,
+}
 
 function serializePeople(req, people) {
   return {
@@ -40,5 +32,3 @@ function serializePerson(req, person) {
     name: person.name,
   }
 }
-
-module.exports = router

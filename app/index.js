@@ -8,8 +8,8 @@ router.get('/', (req, res, next) => {
       self: {
         href: linker(req)
       },
-      login: {
-        href: linker(req, '/api/login')
+      messages: {
+        href: linker(req, '/api/messages')
       },
       people: {
         href: linker(req, '/api/people')

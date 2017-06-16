@@ -4,10 +4,10 @@ const logger = require('morgan')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
-const index = require('./routes/index')
-const login = require('./routes/login')
-const people = require('./routes/people')
-const meetings = require('./routes/meetings')
+const index = require('./app/index')
+const people = require('./app/people/routes')
+const messages = require('./app/messages/routes')
+const meetings = require('./app/meetings')
 
 const app = express()
 
@@ -19,8 +19,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors())
 
 app.use('/api', index)
-app.use('/api', login)
 app.use('/api', people)
+app.use('/api', messages)
 app.use('/api', meetings)
 
 app.use(function(req, res, next) {

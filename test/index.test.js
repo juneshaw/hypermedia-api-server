@@ -17,8 +17,8 @@ describe("GET /api", () => {
         self: {
           href: `http://127.0.0.1:${port}/`
         },
-        login: {
-          href: `http://127.0.0.1:${port}/api/login`
+        messages: {
+          href: `http://127.0.0.1:${port}/api/messages`
         },
         people: {
           href: `http://127.0.0.1:${port}/api/people`

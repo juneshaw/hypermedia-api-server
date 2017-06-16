@@ -26,7 +26,6 @@ router.post('/messages', (req, res, next) => {
 })
 
 router.patch('/messages', (req, res, next) => {
-  console.log(JSON.stringify(req.body, null, 2))
   db.messages.findAll(req.body.messageIds).forEach(message => {
     commands[req.body.command](message, req.body)
   })

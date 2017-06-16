@@ -159,7 +159,6 @@ describe("/api/messages", () => {
           content: 'And it is sent',
         })
       const port = url.parse(response.request.url).port
-
       const message = db.messages.findAll()[0]
 
       expect(response).to.have.status(200)

@@ -22,6 +22,7 @@ app.use('/api', index)
 app.use('/api', people)
 app.use('/api', messages)
 app.use('/api', meetings)
+app.get('/', (req, res, next) => res.redirect('/api'))
 
 app.use(function(req, res, next) {
   const err = new Error('Not Found')
@@ -30,14 +31,13 @@ app.use(function(req, res, next) {
 })
 
 app.use(function(err, req, res, next) {
-  const error = req.app.get('env') === 'development' ? err : {}
-
-  if (process.env.NODE_ENV === 'test') {
-    console.log(err)
-  }
-
+  // NOTE: because this app is intended for educational purposes we print the error details in all environments.
+  // In a real app you wouldn't give stack traces in production.
   res.status(err.status || 500)
-  res.json(err)
+  res.json({
+    error: err.toString(),
+    stack: err.stack.split("\n").slice(1).map(line => line.trim()),
+  })
 })
 
 module.exports = app

@@ -43,12 +43,6 @@ This API uses Hypermedia.  So once you make the first request to the index path,
 
 ### Messages
 
-Messages either have a sender, or a receiver.
-
-If it has a `sender`, it means you _received_ the message.
-
-If it has a `receiver`, it means you _sent_ the message.
-
 ### `GET /api/messages`
 
 Response:
@@ -75,11 +69,7 @@ Response:
         "labels": [
           "dev",
           "personal"
-        ],
-        "sender": {
-          "id": 1,
-          "ref": "http://localhost:8181/api/people/1"
-        }
+        ]
       },
       {
         "_links": {
@@ -91,46 +81,16 @@ Response:
         "subject": "Hi again",
         "starred": false,
         "read": false,
-        "labels": [],
-        "sender": {
-          "id": 2,
-          "ref": "http://localhost:8181/api/people/2"
-        }
+        "labels": []
       }
     ],
-    "people": [
-      {
-        "_links": {
-          "self": {
-            "href": "http://localhost:8181/api/people/1"
-          },
-          "meetings": {
-            "href": "http://localhost:8181/api/people/1/meetings"
-          }
-        },
-        "id": 1,
-        "name": "Frida Kuvalis"
-      },
-      {
-        "_links": {
-          "self": {
-            "href": "http://localhost:8181/api/people/2"
-          },
-          "meetings": {
-            "href": "http://localhost:8181/api/people/2/meetings"
-          }
-        },
-        "id": 2,
-        "name": "Demarcus Mayer"
-      }
-    ]
   }
 }
 ```
 
 ### `GET /api/messages/:id`
 
-Response (notice that there is a `content` field in this response that is not present in the `/api/messages` endpoint):
+Response (notice that there is a `body` field in this response that is not present in the `/api/messages` endpoint):
 
 ```json
 {
@@ -147,11 +107,7 @@ Response (notice that there is a `content` field in this response that is not pr
     "dev",
     "personal"
   ],
-  "sender": {
-    "id": 1,
-    "ref": "http://localhost:8181/api/people/1"
-  },
-  "content": "Hello there"
+  "body": "Hello there"
 }
 ```
 
@@ -161,9 +117,8 @@ Request:
 
 ```json
 {
-  "recipient_id": 1,
   "subject": "I created this",
-  "content": "And it is sent"
+  "body": "And it is sent"
 }
 ```
 
@@ -181,11 +136,7 @@ Response:
   "starred": false,
   "read": false,
   "labels": [],
-  "recipient": {
-    "id": 1,
-    "ref": "http://localhost:8181/api/people/1"
-  },
-  "content": "And it is sent"
+  "body": "And it is sent"
 }
 ```
 

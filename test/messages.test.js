@@ -11,17 +11,13 @@ describe("/api/messages", () => {
     beforeEach(() => db.init())
 
     it("renders a 200 with the a list of messages", async () => {
-      const frida = db.people.insert({name: "Frida Kuvalis"})
-      const demarcus = db.people.insert({name: "Demarcus Mayer"})
       const message1 = db.messages.insert({
-        sender_id: frida.id,
         subject: 'Hi',
         starred: true,
         read: true,
         labels: ['dev', 'personal'],
       })
       const message2 = db.messages.insert({
-        sender_id: demarcus.id,
         subject: 'Hi again',
         starred: false,
         read: false,
@@ -52,9 +48,6 @@ describe("/api/messages", () => {
               starred: true,
               read: true,
               labels: ['dev', 'personal'],
-              sender: {
-                id: frida.id, ref: `http://127.0.0.1:${port}/api/people/${frida.id}`
-              },
             },
             {
               _links: {
@@ -67,37 +60,8 @@ describe("/api/messages", () => {
               starred: false,
               read: false,
               labels: [],
-              sender: {
-                id: demarcus.id, ref: `http://127.0.0.1:${port}/api/people/${demarcus.id}`
-              },
             },
           ],
-          people: [
-            {
-              _links: {
-                self: {
-                  href: `http://127.0.0.1:${port}/api/people/${frida.id}`,
-                },
-                meetings: {
-                  href: `http://127.0.0.1:${port}/api/people/${frida.id}/meetings`,
-                },
-              },
-              id: frida.id,
-              name: frida.name,
-            },
-            {
-              _links: {
-                self: {
-                  href: `http://127.0.0.1:${port}/api/people/${demarcus.id}`,
-                },
-                meetings: {
-                  href: `http://127.0.0.1:${port}/api/people/${demarcus.id}/meetings`,
-                },
-              },
-              id: demarcus.id,
-              name: demarcus.name,
-            }
-          ]
         }
       })
     })
@@ -108,12 +72,9 @@ describe("/api/messages", () => {
     beforeEach(() => db.init())
 
     it("renders a 200 with the a list of messages", async () => {
-      const frida = db.people.insert({name: "Frida Kuvalis"})
-      const demarcus = db.people.insert({name: "Demarcus Mayer"})
       const message = db.messages.insert({
-        sender_id: frida.id,
         subject: 'Hi',
-        content: 'Hello there',
+        body: 'Hello there',
         starred: true,
         read: true,
         labels: ['dev', 'personal'],
@@ -135,10 +96,7 @@ describe("/api/messages", () => {
         starred: true,
         read: true,
         labels: ['dev', 'personal'],
-        content: 'Hello there',
-        sender: {
-          id: frida.id, ref: `http://127.0.0.1:${port}/api/people/${frida.id}`
-        },
+        body: 'Hello there',
       })
     })
 
@@ -148,15 +106,12 @@ describe("/api/messages", () => {
 
     beforeEach(() => db.init())
 
-    it("creates a message with a null sender", async () => {
-      const frida = db.people.insert({name: "Frida Kuvalis"})
-
+    it("creates a message", async () => {
       const response = await chai.request(app)
         .post(`/api/messages`)
         .send({
-          recipient_id: frida.id,
           subject: 'I created this',
-          content: 'And it is sent',
+          body: 'And it is sent',
         })
       const port = url.parse(response.request.url).port
       const message = db.messages.findAll()[0]
@@ -174,10 +129,7 @@ describe("/api/messages", () => {
         starred: false,
         read: false,
         labels: [],
-        content: 'And it is sent',
-        recipient: {
-          id: frida.id, ref: `http://127.0.0.1:${port}/api/people/${frida.id}`
-        },
+        body: 'And it is sent',
       })
     })
 
@@ -187,15 +139,12 @@ describe("/api/messages", () => {
 
     beforeEach(() => db.init())
 
-    it("creates a message with a null sender", async () => {
-      const frida = db.people.insert({name: "Frida Kuvalis"})
-
+    it("creates a message", async () => {
       const response = await chai.request(app)
         .post(`/api/messages`)
         .send({
-          recipient_id: frida.id,
           subject: 'I created this',
-          content: 'And it is sent',
+          body: 'And it is sent',
         })
       const port = url.parse(response.request.url).port
       const message = db.messages.findAll()[0]
@@ -213,10 +162,7 @@ describe("/api/messages", () => {
         starred: false,
         read: false,
         labels: [],
-        content: 'And it is sent',
-        recipient: {
-          id: frida.id, ref: `http://127.0.0.1:${port}/api/people/${frida.id}`
-        },
+        body: 'And it is sent',
       })
     })
   })

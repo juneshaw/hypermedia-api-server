@@ -15,9 +15,8 @@ router.get('/messages/:id', (req, res, next) => {
 
 router.post('/messages', (req, res, next) => {
   const message = db.messages.insert({
-    recipient_id: req.body.recipient_id,
     subject: req.body.subject,
-    content: req.body.content,
+    body: req.body.body,
     read: false,
     starred: false,
     labels: [],

@@ -23,6 +23,12 @@ describe("GET /api", () => {
         people: {
           href: `http://127.0.0.1:${port}/api/people`
         },
+        products: {
+          href: `http://127.0.0.1:${port}/api/products`
+        },
+        items: {
+          href: `http://127.0.0.1:${port}/api/items`
+        },
       }
     })
   })

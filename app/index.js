@@ -14,6 +14,12 @@ router.get('/', (req, res, next) => {
       people: {
         href: linker(req, '/api/people')
       },
+      products: {
+        href: linker(req, '/api/products')
+      },
+      items: {
+        href: linker(req, '/api/items')
+      },
     }
   })
 })

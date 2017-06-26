@@ -6,6 +6,7 @@ const cors = require('cors')
 
 const index = require('./app/index')
 const people = require('./app/people/routes')
+const shoppingCart = require('./app/shopping-cart/routes')
 const messages = require('./app/messages/routes')
 const meetings = require('./app/meetings')
 
@@ -22,6 +23,7 @@ app.use('/api', index)
 app.use('/api', people)
 app.use('/api', messages)
 app.use('/api', meetings)
+app.use('/api', shoppingCart)
 app.get('/', (req, res, next) => res.redirect('/api'))
 
 app.use(function(req, res, next) {

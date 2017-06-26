@@ -43,11 +43,6 @@ const serializeItems = (req, items) => (
 
 const serializeItem = (req, item) => (
   {
-    // _links: {
-    //   self: {
-    //     href: linker(req, `/api/products/${item.id}`)
-    //   }
-    // },
     id: item.id,
     quantity: item.quantity,
     product: {
@@ -70,5 +65,6 @@ const getProducts = items => (
 
 module.exports = {
   serializeProducts,
+  serializeProduct,
   serializeItems,
 }

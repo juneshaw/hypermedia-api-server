@@ -33,11 +33,6 @@ describe("/api/items", () => {
         _embedded: {
           items: [
             {
-              // _links: {
-              //   self: {
-              //     href: `http://127.0.0.1:${port}/api/items/${item1.id}`
-              //   },
-              // },
               id: item1.id,
               quantity: 2,
               product: {
@@ -46,11 +41,6 @@ describe("/api/items", () => {
               },
             },
             {
-              // _links: {
-              //   self: {
-              //     href: `http://127.0.0.1:${port}/api/items/${item2.id}`
-              //   },
-              // },
               id: item2.id,
               quantity: 3,
               product: {

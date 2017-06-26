@@ -53,4 +53,28 @@ describe("/api/products", () => {
     })
   })
 
+  describe("GET /api/products/:id", () => {
+    beforeEach(() => db.init())
+
+    it("renders a 200 with the product", async () => {
+      const product = db.products.insert({ name: 'Heavy Duty Concrete Plate', priceInCents: 499 })
+
+      const response = await chai.request(app).get(`/api/products/${product.id}`)
+      const port = url.parse(response.request.url).port
+
+      expect(response).to.have.status(200)
+      expect(response).to.be.json
+      expect(response.body).to.deep.eq({
+        _links: {
+          self: {
+            href: `http://127.0.0.1:${port}/api/products/${product.id}`
+          },
+        },
+        id: product.id,
+        name: 'Heavy Duty Concrete Plate',
+        priceInCents: 499,
+      })
+    })
+  })
+
 })

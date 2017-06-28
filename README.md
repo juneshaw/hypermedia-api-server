@@ -23,7 +23,7 @@ Then you can see the API running on http://localhost:8181
 
 This API uses Hypermedia.  So once you make the first request to the index path, you can get all the URLs from that point on.
 
-### `GET /api`
+#### `GET /api`
 
 ```json
 {
@@ -43,7 +43,7 @@ This API uses Hypermedia.  So once you make the first request to the index path,
 
 ### Messages
 
-### `GET /api/messages`
+#### `GET /api/messages`
 
 Response:
 
@@ -88,7 +88,7 @@ Response:
 }
 ```
 
-### `GET /api/messages/:id`
+#### `GET /api/messages/:id`
 
 Response (notice that there is a `body` field in this response that is not present in the `/api/messages` endpoint):
 
@@ -111,7 +111,7 @@ Response (notice that there is a `body` field in this response that is not prese
 }
 ```
 
-### `POST /api/messages`
+#### `POST /api/messages`
 
 Request:
 
@@ -140,7 +140,7 @@ Response:
 }
 ```
 
-### `PATCH /api/messages`
+#### `PATCH /api/messages`
 
 The request body can be any of these:
 
@@ -189,9 +189,99 @@ The request body can be any of these:
 
 Response: An HTTP 200 Response
 
+### Products
+
+#### `GET /api/products`
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "http://localhost:8181/api/products"
+    }
+  },
+  "_embedded": {
+    "products": [
+      {
+        "_links": {
+          "self": {
+            "href": "http://localhost:8181/api/products/1"
+          }
+        },
+        "id": 1,
+        "name": "Mediocre Iron Watch",
+        "priceInCents": 399
+      }
+    ]
+  }
+}
+```
+
+#### `GET /api/products/:id`
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "http://localhost:8181/api/products/1"
+    }
+  },
+  "id": 1,
+  "name": "Mediocre Iron Watch",
+  "priceInCents": 399
+}
+```
+
+### Shopping Cart Items
+
+#### `GET /api/items`
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "http://localhost:8181/api/items"
+    }
+  },
+  "_embedded": {
+    "items": [
+      {
+        "id": 1,
+        "quantity": 1,
+        "product": {
+          "ref": "http://localhost:8181/api/products/1",
+          "id": 1
+        }
+      }
+    ]
+  }
+}
+```
+
+#### `POST /api/products/:productId/items`
+
+Request body:
+
+```json
+{ "quantity": 45 }
+```
+
+Response body:
+
+```json
+{
+  "id": 1,
+  "quantity": 1,
+  "product": {
+    "ref": "http://localhost:8181/api/products/1",
+    "id": 1
+  }
+}
+```
+
 ### People
 
-### `GET /api/people`
+#### `GET /api/people`
 
 Response:
 
@@ -233,7 +323,7 @@ Response:
 }
 ```
 
-### `GET /api/people/:id`
+#### `GET /api/people/:id`
 
 Response:
 
@@ -254,7 +344,7 @@ Response:
 
 ### Meetings
 
-### `GET /api/people/:personId/meetings`
+#### `GET /api/people/:personId/meetings`
 
 Response:
 
@@ -310,7 +400,7 @@ Response:
 }
 ```
 
-### `POST /api/people/:personId/meetings`
+#### `POST /api/people/:personId/meetings`
 
 Request:
 
@@ -345,7 +435,7 @@ Response:
 }
 ```
 
-### `GET /api/people/:personId/meetings/:id`
+#### `GET /api/people/:personId/meetings/:id`
 
 Response:
 

@@ -19,6 +19,9 @@ const serializeProduct = (req, product) => (
     _links: {
       self: {
         href: linker(req, `/api/products/${product.id}`)
+      },
+      items: {
+        href: linker(req, `/api/products/${product.id}/items`)
       }
     },
     id: product.id,
@@ -67,4 +70,5 @@ module.exports = {
   serializeProducts,
   serializeProduct,
   serializeItems,
+  serializeItem,
 }

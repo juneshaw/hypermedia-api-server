@@ -32,6 +32,9 @@ describe("/api/products", () => {
                 self: {
                   href: `http://127.0.0.1:${port}/api/products/${product1.id}`
                 },
+                items: {
+                  href: `http://127.0.0.1:${port}/api/products/${product1.id}/items`
+                },
               },
               id: product1.id,
               name: 'Mediocre Iron Watch',
@@ -41,6 +44,9 @@ describe("/api/products", () => {
               _links: {
                 self: {
                   href: `http://127.0.0.1:${port}/api/products/${product2.id}`
+                },
+                items: {
+                  href: `http://127.0.0.1:${port}/api/products/${product2.id}/items`
                 },
               },
               id: product2.id,
@@ -68,6 +74,9 @@ describe("/api/products", () => {
         _links: {
           self: {
             href: `http://127.0.0.1:${port}/api/products/${product.id}`
+          },
+          items: {
+            href: `http://127.0.0.1:${port}/api/products/${product.id}/items`
           },
         },
         id: product.id,

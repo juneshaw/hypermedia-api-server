@@ -4,7 +4,7 @@ const db = require('../../lib/db')
 const { serializePeople, serializePerson } = require('./serializers')
 
 router.get('/people', (req, res, next) => {
-  const people = db.people.findAll()
+  const people = db.people.findAll().slice(0).sort((a, b) => a.name > b.name ? 1 : 0)
   res.json(serializePeople(req, people))
 })
 

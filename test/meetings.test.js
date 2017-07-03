@@ -76,7 +76,7 @@ describe("POST /api/people/:id/meetings", () => {
     const response = await chai.request(app)
       .post(`/api/people/${frida.id}/meetings`)
       .send({
-        otherPersonId: demarcus.id,
+        otherPersonId: demarcus.id.toString(),
         comment: "Some comment"
       })
     const port = url.parse(response.request.url).port

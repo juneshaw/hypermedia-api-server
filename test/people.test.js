@@ -9,7 +9,7 @@ describe("GET /api/people", () => {
 
   beforeEach(() => db.init())
 
-  it("renders a 200 with the a list of people", async () => {
+  it("renders a 200 with the a list of people sorted by name", async () => {
     const person1 = db.people.insert({name: "Frida Kuvalis"})
     const person2 = db.people.insert({name: "Demarcus Mayer"})
 
@@ -29,18 +29,6 @@ describe("GET /api/people", () => {
           {
             _links: {
               self: {
-                href: `http://127.0.0.1:${port}/api/people/${person1.id}`
-              },
-              meetings: {
-                href: `http://127.0.0.1:${port}/api/people/${person1.id}/meetings`
-              },
-            },
-            id: person1.id,
-            name: 'Frida Kuvalis',
-          },
-          {
-            _links: {
-              self: {
                 href: `http://127.0.0.1:${port}/api/people/${person2.id}`
               },
               meetings: {
@@ -49,6 +37,18 @@ describe("GET /api/people", () => {
             },
             id: person2.id,
             name: 'Demarcus Mayer',
+          },
+          {
+            _links: {
+              self: {
+                href: `http://127.0.0.1:${port}/api/people/${person1.id}`
+              },
+              meetings: {
+                href: `http://127.0.0.1:${port}/api/people/${person1.id}/meetings`
+              },
+            },
+            id: person1.id,
+            name: 'Frida Kuvalis',
           },
         ]
       }

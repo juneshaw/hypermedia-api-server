@@ -14,19 +14,14 @@ router.get('/people/:personId/meetings', (req, res, next) => {
 router.post('/people/:personId/meetings', (req, res, next) => {
   const meeting = db.meetings.insert({
     person1_id: parseInt(req.params.personId, 10),
-    person2_id: req.body.otherPersonId,
+    person2_id: parseInt(req.body.otherPersonId, 10),
     comment: req.body.comment,
   })
 
+  console.log("Inserting: ", meeting)
+
   res.json(serializeMeeting(req, meeting))
 })
-
-function withParticipant(personId) {
-  personId = parseInt(personId, 10)
-  return function(meeting) {
-    return meeting.person1_id === personId || meeting.person2_id === personId
-  }
-}
 
 function serializeMeetings(req, meetings) {
   return {
@@ -54,6 +49,13 @@ function serializeMeeting(req, meeting) {
     ],
     id: meeting.id,
     comment: meeting.comment,
+  }
+}
+
+function withParticipant(personId) {
+  personId = parseInt(personId, 10)
+  return function(meeting) {
+    return meeting.person1_id === personId || meeting.person2_id === personId
   }
 }
 

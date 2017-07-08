@@ -18,8 +18,6 @@ router.post('/people/:personId/meetings', (req, res, next) => {
     comment: req.body.comment,
   })
 
-  console.log("Inserting: ", meeting)
-
   res.json(serializeMeeting(req, meeting))
 })
 

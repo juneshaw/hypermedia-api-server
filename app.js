@@ -19,6 +19,10 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors())
 
+app.use((req, res, next) => {
+  if (req.query.delay) return setTimeout(next, parseInt(req.query.delay, 10))
+  next()
+})
 app.use('/api', index)
 app.use('/api', people)
 app.use('/api', messages)

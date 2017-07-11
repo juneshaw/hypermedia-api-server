@@ -205,7 +205,10 @@ Response: An HTTP 200 Response
       {
         "_links": {
           "self": {
-            "href": "http://localhost:8181/api/products/1"
+              "href": "http://localhost:8181/api/products/1"
+          },
+          "items": {
+            "href": "http://localhost:8181/api/products/1/items"
           }
         },
         "id": 1,
@@ -224,6 +227,9 @@ Response: An HTTP 200 Response
   "_links": {
     "self": {
       "href": "http://localhost:8181/api/products/1"
+    },
+    "items": {
+      "href": "http://localhost:8181/api/products/1/items"
     }
   },
   "id": 1,
@@ -235,6 +241,8 @@ Response: An HTTP 200 Response
 ### Shopping Cart Items
 
 #### `GET /api/items`
+
+note that the `products` returned by this call are only the ones that are referenced by one or more of the `items`. For a list of all `products` use the `api/products` endpoint.
 
 ```json
 {
@@ -252,6 +260,21 @@ Response: An HTTP 200 Response
           "ref": "http://localhost:8181/api/products/1",
           "id": 1
         }
+      }
+    ],
+    "products": [
+      {
+        "_links": {
+          "self": {
+            "href": "http://localhost:8181/api/products/1"
+          },
+          "items": {
+            "href": "http://localhost:8181/api/products/1/items"
+          }
+        },
+        "id": 1,
+        "name": "Mediocre Iron Watch",
+        "priceInCents": 399
       }
     ]
   }

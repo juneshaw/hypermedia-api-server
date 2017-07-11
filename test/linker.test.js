@@ -59,4 +59,20 @@ describe("linker", () => {
       expect(linker(req)).to.eq('http://example.com/api')
     })
 
+    it("respects the x-forwarded-for header", () => {
+      const req = {
+        headers: {
+          'x-forwarded-for': 'https://api.example.com',
+        },
+        path: '/api',
+        protocol: 'http',
+        get() {
+          return 'example.com'
+        },
+        pathname: '/foobar',
+      }
+
+      expect(linker(req)).to.eq('https://api.example.com/api')
+    })
+
 })

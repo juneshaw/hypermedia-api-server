@@ -53,7 +53,7 @@ const commands = {
 
   removeLabel (message, cmd) {
     if (message.labels.includes(cmd.label)) {
-      message.labels.splice(message.labels.indexOf(cmd.label, 1))
+      message.labels.splice(message.labels.indexOf(cmd.label), 1)
     }
   },
 }

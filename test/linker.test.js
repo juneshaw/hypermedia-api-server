@@ -75,4 +75,20 @@ describe("linker", () => {
       expect(linker(req)).to.eq('https://api.example.com/api')
     })
 
+    it("defaults to the x-forwarded-proto header if x-forwarded-for is an IP address", () => {
+      const req = {
+        headers: {
+          'x-forwarded-for': '71.196.136.34',
+          'x-forwarded-proto': 'https'
+        },
+        path: '/api',
+        get() {
+          return 'example.com'
+        },
+        pathname: '/foobar',
+      }
+
+      expect(linker(req)).to.eq('https://example.com/api')
+    })
+
 })

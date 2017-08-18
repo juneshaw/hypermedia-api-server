@@ -10,13 +10,13 @@ describe("linker", () => {
         path: '/api',
         protocol: 'http',
         get() {
-          return 'localhost:8181'
+          return 'localhost:8082'
         },
         pathname: '/foobar',
         query: { delay: 500 }
       }
 
-      expect(linker(req)).to.eq('http://localhost:8181/api?delay=500')
+      expect(linker(req)).to.eq('http://localhost:8082/api?delay=500')
     })
 
     it("ignores other query parameters", () => {
@@ -24,13 +24,13 @@ describe("linker", () => {
         path: '/api',
         protocol: 'http',
         get() {
-          return 'localhost:8181'
+          return 'localhost:8082'
         },
         pathname: '/foobar',
         query: { other: 500 }
       }
 
-      expect(linker(req)).to.eq('http://localhost:8181/api')
+      expect(linker(req)).to.eq('http://localhost:8082/api')
     })
 
     it("does not add the delay parameter when it's not present", () => {
@@ -38,12 +38,12 @@ describe("linker", () => {
         path: '/api',
         protocol: 'http',
         get() {
-          return 'localhost:8181'
+          return 'localhost:8082'
         },
         pathname: '/foobar',
       }
 
-      expect(linker(req)).to.eq('http://localhost:8181/api')
+      expect(linker(req)).to.eq('http://localhost:8082/api')
     })
 
     it("skips the port if a port didn't come in", () => {

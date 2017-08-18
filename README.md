@@ -17,7 +17,7 @@ yarn
 yarn start
 ```
 
-Then you can see the API running on http://localhost:8181
+Then you can see the API running on http://localhost:8082
 
 ## API Endpoints
 
@@ -29,13 +29,13 @@ This API uses Hypermedia.  So once you make the first request to the index path,
 {
   "_links": {
     "self": {
-      "href": "http://localhost:8181/"
+      "href": "http://localhost:8082/"
     },
     "messages": {
-      "href": "http://localhost:8181/api/messages"
+      "href": "http://localhost:8082/api/messages"
     },
     "people": {
-      "href": "http://localhost:8181/api/people"
+      "href": "http://localhost:8082/api/people"
     }
   }
 }
@@ -51,7 +51,7 @@ Response:
 {
   "_links": {
     "self": {
-      "href": "http://localhost:8181/api/messages"
+      "href": "http://localhost:8082/api/messages"
     }
   },
   "_embedded": {
@@ -59,7 +59,7 @@ Response:
       {
         "_links": {
           "self": {
-            "href": "http://localhost:8181/api/messages/1"
+            "href": "http://localhost:8082/api/messages/1"
           }
         },
         "id": 1,
@@ -74,7 +74,7 @@ Response:
       {
         "_links": {
           "self": {
-            "href": "http://localhost:8181/api/messages/2"
+            "href": "http://localhost:8082/api/messages/2"
           }
         },
         "id": 2,
@@ -96,7 +96,7 @@ Response (notice that there is a `body` field in this response that is not prese
 {
   "_links": {
     "self": {
-      "href": "http://localhost:8181/api/messages/1"
+      "href": "http://localhost:8082/api/messages/1"
     }
   },
   "id": 1,
@@ -128,7 +128,7 @@ Response:
 {
   "_links": {
     "self": {
-      "href": "http://localhost:8181/api/messages/1"
+      "href": "http://localhost:8082/api/messages/1"
     }
   },
   "id": 1,
@@ -197,7 +197,7 @@ Response: An HTTP 200 Response
 {
   "_links": {
     "self": {
-      "href": "http://localhost:8181/api/products"
+      "href": "http://localhost:8082/api/products"
     }
   },
   "_embedded": {
@@ -205,10 +205,10 @@ Response: An HTTP 200 Response
       {
         "_links": {
           "self": {
-              "href": "http://localhost:8181/api/products/1"
+              "href": "http://localhost:8082/api/products/1"
           },
           "items": {
-            "href": "http://localhost:8181/api/products/1/items"
+            "href": "http://localhost:8082/api/products/1/items"
           }
         },
         "id": 1,
@@ -226,10 +226,10 @@ Response: An HTTP 200 Response
 {
   "_links": {
     "self": {
-      "href": "http://localhost:8181/api/products/1"
+      "href": "http://localhost:8082/api/products/1"
     },
     "items": {
-      "href": "http://localhost:8181/api/products/1/items"
+      "href": "http://localhost:8082/api/products/1/items"
     }
   },
   "id": 1,
@@ -248,7 +248,7 @@ note that the `products` returned by this call are only the ones that are refere
 {
   "_links": {
     "self": {
-      "href": "http://localhost:8181/api/items"
+      "href": "http://localhost:8082/api/items"
     }
   },
   "_embedded": {
@@ -257,7 +257,7 @@ note that the `products` returned by this call are only the ones that are refere
         "id": 1,
         "quantity": 1,
         "product": {
-          "ref": "http://localhost:8181/api/products/1",
+          "ref": "http://localhost:8082/api/products/1",
           "id": 1
         }
       }
@@ -266,10 +266,10 @@ note that the `products` returned by this call are only the ones that are refere
       {
         "_links": {
           "self": {
-            "href": "http://localhost:8181/api/products/1"
+            "href": "http://localhost:8082/api/products/1"
           },
           "items": {
-            "href": "http://localhost:8181/api/products/1/items"
+            "href": "http://localhost:8082/api/products/1/items"
           }
         },
         "id": 1,
@@ -296,7 +296,7 @@ Response body:
   "id": 1,
   "quantity": 1,
   "product": {
-    "ref": "http://localhost:8181/api/products/1",
+    "ref": "http://localhost:8082/api/products/1",
     "id": 1
   }
 }
@@ -312,7 +312,7 @@ Response:
 {
   "_links": {
     "self": {
-      "href": "http://localhost:8181/api/people"
+      "href": "http://localhost:8082/api/people"
     }
   },
   "_embedded": {
@@ -320,10 +320,10 @@ Response:
       {
         "_links": {
           "self": {
-            "href": "http://localhost:8181/api/people/1"
+            "href": "http://localhost:8082/api/people/1"
           },
           "meetings": {
-            "href": "http://localhost:8181/api/people/1/meetings"
+            "href": "http://localhost:8082/api/people/1/meetings"
           }
         },
         "id": 1,
@@ -332,10 +332,10 @@ Response:
       {
         "_links": {
           "self": {
-            "href": "http://localhost:8181/api/people/2"
+            "href": "http://localhost:8082/api/people/2"
           },
           "meetings": {
-            "href": "http://localhost:8181/api/people/2/meetings"
+            "href": "http://localhost:8082/api/people/2/meetings"
           }
         },
         "id": 2,
@@ -354,10 +354,10 @@ Response:
 {
   "_links": {
     "self": {
-      "href": "http://localhost:8181/api/people/1"
+      "href": "http://localhost:8082/api/people/1"
     },
     "meetings": {
-      "href": "http://localhost:8181/api/people/1/meetings"
+      "href": "http://localhost:8082/api/people/1/meetings"
     }
   },
   "id": 1,
@@ -375,7 +375,7 @@ Response:
 {
   "_links": {
     "self": {
-      "href": "http://localhost:8181/api/people/1/meetings"
+      "href": "http://localhost:8082/api/people/1/meetings"
     }
   },
   "_embedded": {
@@ -383,17 +383,17 @@ Response:
       {
         "_links": {
           "self": {
-            "href": "http://localhost:8181/api/people/1/meetings/1"
+            "href": "http://localhost:8082/api/people/1/meetings/1"
           }
         },
         "people": [
           {
             "id": 1,
-            "ref": "http://localhost:8181/api/people/1"
+            "ref": "http://localhost:8082/api/people/1"
           },
           {
             "id": 2,
-            "ref": "http://localhost:8181/api/people/2"
+            "ref": "http://localhost:8082/api/people/2"
           }
         ],
         "id": 1,
@@ -402,17 +402,17 @@ Response:
       {
         "_links": {
           "self": {
-            "href": "http://localhost:8181/api/people/1/meetings/2"
+            "href": "http://localhost:8082/api/people/1/meetings/2"
           }
         },
         "people": [
           {
             "id": 3,
-            "ref": "http://localhost:8181/api/people/3"
+            "ref": "http://localhost:8082/api/people/3"
           },
           {
             "id": 1,
-            "ref": "http://localhost:8181/api/people/1"
+            "ref": "http://localhost:8082/api/people/1"
           }
         ],
         "id": 2,
@@ -440,17 +440,17 @@ Response:
 {
   "_links": {
     "self": {
-      "href": "http://localhost:8181/api/people/1/meetings/1"
+      "href": "http://localhost:8082/api/people/1/meetings/1"
     }
   },
   "people": [
     {
       "id": 1,
-      "ref": "http://localhost:8181/api/people/1"
+      "ref": "http://localhost:8082/api/people/1"
     },
     {
       "id": 2,
-      "ref": "http://localhost:8181/api/people/2"
+      "ref": "http://localhost:8082/api/people/2"
     }
   ],
   "id": 1,
@@ -466,17 +466,17 @@ Response:
 {
   "_links": {
     "self": {
-      "href": "http://localhost:8181/api/people/1/meetings/1"
+      "href": "http://localhost:8082/api/people/1/meetings/1"
     }
   },
   "people": [
     {
       "id": 1,
-      "ref": "http://localhost:8181/api/people/1"
+      "ref": "http://localhost:8082/api/people/1"
     },
     {
       "id": 2,
-      "ref": "http://localhost:8181/api/people/2"
+      "ref": "http://localhost:8082/api/people/2"
     }
   ],
   "id": 1,

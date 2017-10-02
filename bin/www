@@ -13,6 +13,9 @@ var http = require('http');
  */
 
 var port = normalizePort(process.env.PORT || '8082');
+if (!process.env.PORT) {
+  console.log(`Setting port to ${port}.  You can override this by setting the PORT environment variable.`)
+}
 app.set('port', port);
 
 /**

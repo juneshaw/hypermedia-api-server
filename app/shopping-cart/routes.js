@@ -37,11 +37,10 @@ router.post('/products/:productId/items', (req, res, next) => {
 })
 
 router.delete('/products/:productId/items/:itemId', (req, res, next) => {
-  const item = db.products.find(req.params.productId)
+  const item = db.items.find(req.params.itemId)
   if (item) {
     db.items.delete(req.params.itemId)
   }
-  console.log('')
 
   res.status(200)
   res.end()
